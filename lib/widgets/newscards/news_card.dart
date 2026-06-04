@@ -16,8 +16,8 @@ class _NewsCard extends State<NewsCard>{
   @override
   Widget build(BuildContext context) {
     return Obx(()=> ListView.builder(shrinkWrap: true,
-    physics: NeverScrollableScrollPhysics()
-    ,itemCount:  data.newsList.length,
+    physics: NeverScrollableScrollPhysics(),
+        itemCount:  data.newsList.length,
           itemBuilder: (context,index){
             return InkWell(onTap: (){Get.to(()=>NewsdetailsScreens(),arguments: data.newsList[index]);},
               child: Card(
