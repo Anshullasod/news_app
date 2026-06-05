@@ -38,30 +38,40 @@ class LoginController extends GetxController{
   }
   var currentUser = {}.obs;
 
-  Future<void> fetchUserProfile() async{
+  Future<void> fetchUserProfile() async {
+    // 1. Initial stage par loading true kiya
     isLoading.value = true;
-    String? token=GetStorage().read('token');
-    try{final response=await http.get(Uri.parse("${baseURL}auth/profile"),
-        headers: {"Authorization":"Bearer $token",
-                  "Content-Type":"application/json"});
-    if(response.statusCode==200){
-      isLoading.value=false;
-      var data=jsonDecode(response.body);
-      currentUser.value = data;
-    }
-    else
-    {
+
+    String? token = GetStorage().read('token');
+    print('Token for fetching: $token');
+
+    try {
+      final response = await http.get(
+        Uri.parse("${baseURL}auth/profile"),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json"
+        },
+      );
+
       print('Response Status for fetching:::: ${response.statusCode}');
-    }
-    }
-    catch(e){
-      print(e);
-    }
-    finally{
-      isLoading.value=false;
+
+      if (response.statusCode == 200) {
+        var data = jsonDecode(response.body);
+        currentUser.value = data;
+        // Agar custom model hai toh user Model.fromJson(data) use karein
+      } else {
+        // Handle non-200 status codes (Unauthorized, Server Error etc.)
+        print('Failed to load profile. Status: ${response.statusCode}');
+      }
+    } catch (e) {
+      // 2. Network timeout ya parsing error yahan catch hogi
+      print('Catch Error in fetchUserProfile: $e');
+    } finally {
+      // 3. Kuch bhi ho jaye (Success ya Failure), loading yahan aakar hamesha close hogi
+      isLoading.value = false;
     }
   }
-
 
   Future<void> login(String email,String pass) async{
     isLoading.value=true;

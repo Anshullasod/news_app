@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import '../../login/login_controller.dart';
+import 'bottom_controller.dart';
 
 class MyProfileScreen extends StatefulWidget {
   const MyProfileScreen({super.key});
@@ -12,6 +13,7 @@ class MyProfileScreen extends StatefulWidget {
 
 class _MyProfileScreenState extends State<MyProfileScreen> {
   final LoginController profilecontroller = Get.find<LoginController>();
+  final bottomController = Get.find<BottomController>();
   @override
   void initState(){
     super.initState();
@@ -21,11 +23,57 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        title: const Text("My Profile", style: TextStyle(fontWeight: FontWeight.bold)),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        foregroundColor: Colors.black,
+        // Yellow background background aur white/black elements ka combination
+        backgroundColor: Colors.yellow[700], // Thoda premium look ke liye rich yellow
+        elevation: 0.5,
+        foregroundColor: Colors.black, // Icons ka color automatic black ho jayega
+
+        title: const Text(
+          "My Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22,
+            color: Colors.black,
+          ),
+        ),
+        centerTitle: false, // Search bar layout ke sath consistency ke liye left align sahi rahega
+
+        actions: [
+          if (MediaQuery.of(context).size.width >= 600)
+          // Right side mein Menu Button page switch karne ke liye
+          PopupMenuButton<int>(
+            icon: const Icon(Icons.menu, color: Colors.black, size: 28),
+            onSelected: (index) {
+              // GetX controller ke index ko change karega
+              bottomController.change(index);
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                const PopupMenuItem(
+                  value: 0, // Home ka index
+                  child: Row(
+                    children: [
+                      Icon(Icons.home, color: Colors.black54),
+                      SizedBox(width: 8),
+                      Text('Home'),
+                    ],
+                  ),
+                ),
+                const PopupMenuItem(
+                  value: 1, // Profile ka index (Current page)
+                  child: Row(
+                    children: [
+                      Icon(Icons.person, color: Colors.black54),
+                      SizedBox(width: 8),
+                      Text('Profile'),
+                    ],
+                  ),
+                ),
+              ];
+            },
+          ),
+          const SizedBox(width: 8), // Margin ke liye
+        ],
       ),
       body: Obx(() {
         // 1. Loading State

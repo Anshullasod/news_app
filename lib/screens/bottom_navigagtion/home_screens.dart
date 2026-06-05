@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:news_app/api/api_controller.dart';
 import 'package:news_app/sort.dart';
-import 'package:news_app/widgets/hovers/hover.dart';
+import 'package:news_app/widgets/hover.dart';
 import 'dart:async';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
-import 'package:news_app/widgets/newscards/news_card.dart';
+import 'package:news_app/widgets/news_card.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
@@ -67,7 +67,7 @@ class _HomeScreens extends State<HomeScreens> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(140),
+          preferredSize: const Size.fromHeight(120),
           child: Padding(
             padding: const EdgeInsets.only(
               left: 16.0,
@@ -336,6 +336,7 @@ class _HomeScreens extends State<HomeScreens> {
               controller: _scrollController,
               physics: const AlwaysScrollableScrollPhysics(),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // 1. Hover Banner Section
                   SizedBox(height: 200, child: Hover()),
