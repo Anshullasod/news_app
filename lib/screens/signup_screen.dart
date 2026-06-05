@@ -10,7 +10,6 @@ class SignupScreen extends StatefulWidget{
 
 }
 class _SignupScreen extends State<SignupScreen>{
-  @override
   final nameController=TextEditingController();
   final emailController=TextEditingController();
   final passController=TextEditingController();
@@ -18,6 +17,10 @@ class _SignupScreen extends State<SignupScreen>{
   @override
   Widget build(BuildContext context) {
   return Scaffold(
+    appBar: AppBar(
+      leading: ElevatedButton(onPressed: (){Get.offAllNamed('/login');},
+        child: Center(child: Icon(Icons.arrow_back)),),
+    ),
     body: SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 25.0),

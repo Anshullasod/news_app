@@ -37,7 +37,7 @@ class _Hover extends State<Hover> {
                   );
                 },
                 child: Container(
-                  width: 300,
+                  width: double.infinity,
                   height: 200,
                   color: Colors.yellow.shade100,
                   child: Column(
