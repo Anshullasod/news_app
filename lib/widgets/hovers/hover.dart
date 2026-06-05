@@ -4,7 +4,6 @@ import 'package:news_app/api/api_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 import '../../screens/newsdetails_screens.dart';
-import 'package:shimmer_animation/shimmer_animation.dart';
 
 class Hover extends StatefulWidget {
   const Hover({super.key});
