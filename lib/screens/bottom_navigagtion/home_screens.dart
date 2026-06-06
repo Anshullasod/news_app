@@ -10,6 +10,8 @@ import 'package:news_app/widgets/news_card.dart';
 import 'package:flutter_date_pickers/flutter_date_pickers.dart';
 import 'package:shimmer_animation/shimmer_animation.dart';
 
+import '../../login/login_controller.dart';
+
 class HomeScreens extends StatefulWidget {
   const HomeScreens({super.key});
   @override
@@ -18,6 +20,7 @@ class HomeScreens extends StatefulWidget {
 
 class _HomeScreens extends State<HomeScreens> {
   final ApiController data = Get.put(ApiController());
+  final LoginController profilecontroller = Get.find<LoginController>();
   final ScrollController _scrollController = ScrollController();
   final TextEditingController searching = TextEditingController();
   final SortController controller = Get.put(SortController());
@@ -36,6 +39,7 @@ class _HomeScreens extends State<HomeScreens> {
   @override
   void initState() {
     super.initState();
+    profilecontroller.fetchUserProfile();
 
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >= _scrollController.position.maxScrollExtent - 100) {

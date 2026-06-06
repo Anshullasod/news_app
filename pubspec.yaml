@@ -46,6 +46,9 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_date_pickers: ^0.4.3
   shimmer_animation: ^2.2.2+1
+  firebase_core: ^4.10.0
+  firebase_auth: ^6.5.2
+  google_sign_in: ^7.2.0
 
 dev_dependencies:
   flutter_test:

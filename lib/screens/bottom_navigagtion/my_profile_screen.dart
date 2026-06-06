@@ -15,10 +15,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
   final LoginController profilecontroller = Get.find<LoginController>();
   final bottomController = Get.find<BottomController>();
   @override
-  void initState(){
-    super.initState();
-  profilecontroller.fetchUserProfile();
-  }
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],

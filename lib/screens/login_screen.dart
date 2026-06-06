@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/scheduler/binding.dart';
 import 'package:get/get.dart';
 import 'package:news_app/login/login_controller.dart';
+
+import '../login/authcontroller.dart';
 class LoginScreen extends StatefulWidget{
   @override
   State<StatefulWidget> createState() => _LoginScreen();
 }
 class _LoginScreen extends State<LoginScreen>{
   @override
+  final AuthController authController = Get.put(AuthController());
   final emailcontroller=TextEditingController();
   final passcontroller=TextEditingController();
   final LoginController logincontroller=Get.find<LoginController>();
@@ -63,7 +66,7 @@ class _LoginScreen extends State<LoginScreen>{
                  if (emailcontroller.text.isNotEmpty && passcontroller.text.isNotEmpty) {
                    logincontroller.login(emailcontroller.text.trim(), passcontroller.text.trim());
                  } else {
-                  WidgetsBinding.instance.addPostFrameCallback(Get.snackbar("Error", "Please fill all fields", snackPosition: SnackPosition.BOTTOM) as FrameCallback);
+                  Get.snackbar("Error", "Please fill all fields", snackPosition: SnackPosition.BOTTOM);
                  }
                },
                child: logincontroller.isLoading.value
@@ -82,6 +85,16 @@ class _LoginScreen extends State<LoginScreen>{
                  child: const Text("Sign Up", style: TextStyle(fontWeight: FontWeight.bold)),
                ),
              ],
+           ),
+           const SizedBox(height: 20),
+           OutlinedButton.icon(
+             style: OutlinedButton.styleFrom(
+               minimumSize: const Size(double.infinity, 55),
+               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+             ),
+             icon: const Icon(Icons.g_mobiledata, size: 30), // Yahan Google icon use karein
+             label: const Text("Sign in with Google", style: TextStyle(fontSize: 16)),
+             onPressed: () => authController.signInWithGoogle(),
            ),
 
          ],

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "757598541562",
+    "project_id": "dailynews-94c28",
+    "storage_bucket": "dailynews-94c28.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:757598541562:android:550eafb2bb24d212cd9b43",
+        "android_client_info": {
+          "package_name": "com.example.news_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBFxFCnk0DHHVz025jlgAg-tdWBATl3HTc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

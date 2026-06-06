@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,8 @@ class _SplashScreen extends State<SplashScreen>{
     await Future.delayed(const Duration(seconds: 3));
     final box=GetStorage();
     String? token=box.read('token');
-    if(token!=null)
+    User? firebaseUser = FirebaseAuth.instance.currentUser;
+    if(token!=null || firebaseUser != null)
       {
         Get.offAllNamed('/home');
       }

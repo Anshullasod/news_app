@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -9,7 +10,11 @@ class LoginController extends GetxController{
   var token="".obs;
   final String baseURL='https://api.escuelajs.co/api/v1/';
 
-
+  @override
+  void onReady() {
+    super.onReady();
+    fetchUserProfile();
+  }
   Future<void> signUp(String name,String email,String pass) async {
     isLoading.value = true;
     try{
@@ -44,8 +49,30 @@ class LoginController extends GetxController{
 
     String? token = GetStorage().read('token');
     print('Token for fetching: $token');
-
     try {
+      // Branch 1: Check if the user is logged in via Firebase (Google Sign-In)
+      User? firebaseUser = FirebaseAuth.instance.currentUser;
+
+      if (firebaseUser != null) {
+        print('Fetching profile from Firebase');
+        // Standardize the map keys to match your API structure
+        currentUser.value = {
+          "name": firebaseUser.displayName ?? "No Name",
+          "email": firebaseUser.email ?? "No Email",
+          "avatar": firebaseUser.photoURL ?? "https://picsum.photos/800",
+        };
+        return;
+      }
+
+      // Branch 2: Fallback to Custom API
+      String? token = GetStorage().read('token');
+
+      if (token == null || token.isEmpty) {
+        print('No valid token or Firebase session found.');
+        return;
+      }
+
+      print('Fetching profile from Custom API');
       final response = await http.get(
         Uri.parse("${baseURL}auth/profile"),
         headers: {
@@ -54,17 +81,15 @@ class LoginController extends GetxController{
         },
       );
 
-      print('Response Status for fetching:::: ${response.statusCode}');
-
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body);
         currentUser.value = data;
-        // Agar custom model hai toh user Model.fromJson(data) use karein
       } else {
-        // Handle non-200 status codes (Unauthorized, Server Error etc.)
         print('Failed to load profile. Status: ${response.statusCode}');
+        Get.snackbar("Error", "Could not load profile data.");
       }
-    } catch (e) {
+    }
+     catch (e) {
       // 2. Network timeout ya parsing error yahan catch hogi
       print('Catch Error in fetchUserProfile: $e');
     } finally {
