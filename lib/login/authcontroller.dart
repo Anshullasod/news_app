@@ -22,7 +22,7 @@ class AuthController extends GetxController {
       } else {
         // MOBILE ARCHITECTURE: Use GoogleSignIn package
         await _googleSignIn.initialize(
-          serverClientId: "757598541562-g0l1nhica73g8gleedrb0bqla64rtse6.apps.googleusercontent.com",
+          serverClientId: "757598541562-ihungk6d4adshfq04j6aoj18bij5prej.apps.googleusercontent.com",
         );
 
         final GoogleSignInAccount? account = await _googleSignIn.authenticate();

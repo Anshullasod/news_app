@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -130,11 +131,28 @@ class LoginController extends GetxController{
     }
   }
 
-  void logout() {
-    box.remove('token');
-    token.value = "";
-    currentUser.value = {};
-    Get.offAllNamed('/login');
-  }
+  void logout() async {
+    try {
+      isLoading.value = true;
 
+      // 1. Firebase aur Google ka session clear karo
+      if (FirebaseAuth.instance.currentUser != null) {
+        await GoogleSignIn.instance.signOut();
+        await FirebaseAuth.instance.signOut();
+      }
+
+      // 2. Custom API ka token clear karo
+      box.remove('token');
+      token.value = "";
+      currentUser.value = {};
+
+      // 3. Clear karke login page par phenko
+      Get.offAllNamed('/login');
+    } catch (e) {
+      print("Logout error: $e");
+      Get.snackbar("Error", "Logout failed: $e");
+    } finally {
+      isLoading.value = false;
+    }
+  }
 }

@@ -34,7 +34,10 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
         ),
         centerTitle: false, // Search bar layout ke sath consistency ke liye left align sahi rahega
 
-        actions: [
+        actions: [IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () => profilecontroller.logout(), // Hamesha visible rahega
+        ),
           if (MediaQuery.of(context).size.width >= 600)
           // Right side mein Menu Button page switch karne ke liye
           PopupMenuButton<int>(
