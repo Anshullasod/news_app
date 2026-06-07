@@ -24,8 +24,7 @@ Global Search: Real-time search functionality to find specific news articles qui
 Error Resiliency: Implemented custom "Retry" logic to handle network interruptions gracefully.
 
 📱 Application Demo
-(Optional: If you have the video uploaded somewhere, you can add a link here)
-[Link to your demonstration video]
+https://www.linkedin.com/posts/anshullasod_flutter-mobiledevelopment-webdevelopment-ugcPost-7469392543256956928-Vibg/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFV9mfQBj-4VHnvpJ5FICl3A2XVGaLLkWSA
 
 Clone the repository:
 
