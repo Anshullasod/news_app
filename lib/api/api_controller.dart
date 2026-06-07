@@ -19,7 +19,6 @@ class ApiController extends GetxController{
 
   }
   Future<void> fetchnews()async{
-    print('$base${filter.value}?apiKey=$apiKey&q=${type.value}${queryfilter.value}');
    try{
      isLoading(true);
      final response = await http.get(Uri.parse('$base${filter.value}?page=1&pageSize=21&apiKey=$apiKey&q=${type.value}${queryfilter.value}'));
@@ -31,12 +30,10 @@ class ApiController extends GetxController{
 
        }
      else
-       { print(response.body);
-         print(response.statusCode);
+       {
          Get.snackbar('Error in life', '$response.body');
          return;
        }
-     await Future.delayed(Duration(seconds: 3));
    }
    catch(e){
      Get.snackbar('Error', '$e');

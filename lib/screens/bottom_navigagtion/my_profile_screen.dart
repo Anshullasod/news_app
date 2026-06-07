@@ -19,10 +19,9 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        // Yellow background background aur white/black elements ka combination
-        backgroundColor: Colors.yellow[700], // Thoda premium look ke liye rich yellow
+        backgroundColor: Colors.yellow[700],
         elevation: 0.5,
-        foregroundColor: Colors.black, // Icons ka color automatic black ho jayega
+        foregroundColor: Colors.black,
 
         title: const Text(
           "My Profile",
@@ -32,24 +31,23 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
             color: Colors.black,
           ),
         ),
-        centerTitle: false, // Search bar layout ke sath consistency ke liye left align sahi rahega
+        centerTitle: false,
 
         actions: [IconButton(
           icon: const Icon(Icons.logout),
-          onPressed: () => profilecontroller.logout(), // Hamesha visible rahega
+          onPressed: () => profilecontroller.logout(),
         ),
           if (MediaQuery.of(context).size.width >= 600)
-          // Right side mein Menu Button page switch karne ke liye
+
           PopupMenuButton<int>(
             icon: const Icon(Icons.menu, color: Colors.black, size: 28),
             onSelected: (index) {
-              // GetX controller ke index ko change karega
               bottomController.change(index);
             },
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem(
-                  value: 0, // Home ka index
+                  value: 0,
                   child: Row(
                     children: [
                       Icon(Icons.home, color: Colors.black54),
@@ -59,7 +57,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                   ),
                 ),
                 const PopupMenuItem(
-                  value: 1, // Profile ka index (Current page)
+                  value: 1,
                   child: Row(
                     children: [
                       Icon(Icons.person, color: Colors.black54),
@@ -71,7 +69,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
               ];
             },
           ),
-          const SizedBox(width: 8), // Margin ke liye
+          const SizedBox(width: 8),
         ],
       ),
       body: Obx(() {
@@ -216,7 +214,6 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  // Innovative Logout Confirmation Dialog
   void _showLogoutDialog() {
     Get.defaultDialog(
       title: "Logout Confirmation",
@@ -226,8 +223,7 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
       confirmTextColor: Colors.white,
       buttonColor: Colors.red,
       onConfirm: () {
-        GetStorage().erase();
-        Get.offAllNamed('/login'); // Login screen par wapas bhej do
+        profilecontroller.logout();
       },
     );
   }

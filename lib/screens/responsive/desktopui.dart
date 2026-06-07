@@ -70,7 +70,6 @@ class _DesktopuiState extends State<Desktopui> {
           ),
         ),
         actions: [
-          // 1. Search Bar (MediaQuery se responsive width)
           SizedBox(
             width: MediaQuery.of(context).size.width * 0.4, // Screen size ke hisab se adjust hoga
             child: TextField(
@@ -112,11 +111,10 @@ class _DesktopuiState extends State<Desktopui> {
             ),
           ),
 
-          // 2. Menu Button (Home aur Profile Page Change Karne Ke Liye)
+
           PopupMenuButton<int>(
-            icon: const Icon(Icons.menu, color: Colors.black), // Menu icon jaisa dikhega
+            icon: const Icon(Icons.menu, color: Colors.black),
             onSelected: (index) {
-              // GetX controller ke index ko change karega jisse screen badal jaye
               bottomController.change(index);
             },
             itemBuilder: (BuildContext context) {
@@ -149,7 +147,6 @@ class _DesktopuiState extends State<Desktopui> {
       body:Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // === LEFT SIDEBAR: Filters Section (Flex 2 means 25-30% space) ===
           Expanded(
             flex: 2,
             child: Container(
@@ -166,7 +163,6 @@ class _DesktopuiState extends State<Desktopui> {
                   ),
                 ],
               ),
-              // Desktop ke liye Column ke items ke beech thoda space diya hai
               child: SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -178,7 +174,6 @@ class _DesktopuiState extends State<Desktopui> {
                         style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    // Chips ko stretch karne ke liye SizedBox.infinity diya hai
                     SizedBox(
                       width: double.infinity,
                       child: CustomFilterChip(
@@ -277,7 +272,6 @@ class _DesktopuiState extends State<Desktopui> {
             ),
           ),
 
-          // === RIGHT SIDE: News Feed Content (Flex 5 means 70-75% space) ===
           Expanded(
             flex: 5,
             child: Padding(
@@ -303,8 +297,8 @@ class _DesktopuiState extends State<Desktopui> {
                               itemCount: 3,
                               itemBuilder: (BuildContext context, int index, int pageViewIndex) {
                                 return Container(
-                                  width: double.infinity, // Fixed width se badal kar flexible kiya
-                                  height: 200, // Desktop ke liye proper height
+                                  width: double.infinity,
+                                  height: 200,
                                   padding: const EdgeInsets.all(16),
                                   color: Colors.grey.shade200,
                                   child: Column(
@@ -345,7 +339,7 @@ class _DesktopuiState extends State<Desktopui> {
                                 scrollDirection: Axis.horizontal,
                                 autoPlay: false,
                                 viewportFraction: 0.8,
-                                height: 200, // Option height di gayi
+                                height: 200,
                               ),
                             ),
                           ),
@@ -391,11 +385,9 @@ class _DesktopuiState extends State<Desktopui> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          // 1. Hover Banner Section
                           SizedBox(height: 220, child: Hover()),
                           const SizedBox(height: 20),
 
-                          // 2. News Cards Feed
                           NewsCard(),
 
                           // 3. Pagination Loader Section
@@ -440,9 +432,7 @@ class CustomFilterChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 1. Screen ki width ke hisab se responsive font size nikala
     double screenWidth = MediaQuery.of(context).size.width;
-    // Yeh text ko dynamic banayega, par 11 aur 14 ke beech mein lock rakhega
     double responsiveFontSize = (screenWidth * 0.012).clamp(11.0, 14.0);
 
     return Padding(
@@ -472,14 +462,14 @@ class CustomFilterChip extends StatelessWidget {
                 const SizedBox(width: 6),
               ],
 
-              // 2. YAHAN BADLAV KIYA HAI: FittedBox hata kar Flexible lagaya
+
               Flexible(
                 child: Text(
                   label,
-                  maxLines: 1, // Text ek hi line mein rahega
-                  overflow: TextOverflow.ellipsis, // Jagah khatam hone par clean '...' dikhega
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                    fontSize: responsiveFontSize, // Responsive font size apply kiya
+                    fontSize: responsiveFontSize,
                     fontWeight: FontWeight.w600,
                     color: isPrimary ? Colors.black : Colors.black87,
                   ),

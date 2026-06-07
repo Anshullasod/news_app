@@ -361,7 +361,7 @@ class _HomeScreens extends State<HomeScreens> {
                       ),
                     )
                   else
-                    const SizedBox(height: 20), // Khali safe bottom spacing
+                    const SizedBox(height: 20),
                 ],
               ),
             ),

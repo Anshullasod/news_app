@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/scheduler/binding.dart';
 import 'package:get/get.dart';
 import 'package:news_app/login/login_controller.dart';
 
@@ -62,7 +61,6 @@ class _LoginScreen extends State<LoginScreen>{
                onPressed: logincontroller.isLoading.value
                    ? null
                    : () {
-                 // Logic: Input validation ke baad Controller call karo
                  if (emailcontroller.text.isNotEmpty && passcontroller.text.isNotEmpty) {
                    logincontroller.login(emailcontroller.text.trim(), passcontroller.text.trim());
                  } else {
@@ -92,7 +90,7 @@ class _LoginScreen extends State<LoginScreen>{
                minimumSize: const Size(double.infinity, 55),
                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
              ),
-             icon: const Icon(Icons.g_mobiledata, size: 30), // Yahan Google icon use karein
+             icon: const Icon(Icons.g_mobiledata, size: 30),
              label: const Text("Sign in with Google", style: TextStyle(fontSize: 16)),
              onPressed: () => authController.signInWithGoogle(),
            ),

@@ -28,7 +28,6 @@ class AuthController extends GetxController {
         final GoogleSignInAccount? account = await _googleSignIn.authenticate();
 
         if (account == null) {
-          print("User canceled the mobile login process");
           return;
         }
 

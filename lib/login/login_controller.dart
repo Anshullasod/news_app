@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
@@ -34,7 +33,6 @@ class LoginController extends GetxController{
           Get.offAllNamed('login');
         }
       else{
-        print(response.statusCode.toString());
         Get.snackbar("Error", "Sign Up failed....");
       }
     }
@@ -45,17 +43,14 @@ class LoginController extends GetxController{
   var currentUser = {}.obs;
 
   Future<void> fetchUserProfile() async {
-    // 1. Initial stage par loading true kiya
     isLoading.value = true;
 
     String? token = GetStorage().read('token');
-    print('Token for fetching: $token');
     try {
       // Branch 1: Check if the user is logged in via Firebase (Google Sign-In)
       User? firebaseUser = FirebaseAuth.instance.currentUser;
 
       if (firebaseUser != null) {
-        print('Fetching profile from Firebase');
         // Standardize the map keys to match your API structure
         currentUser.value = {
           "name": firebaseUser.displayName ?? "No Name",
@@ -73,7 +68,6 @@ class LoginController extends GetxController{
         return;
       }
 
-      print('Fetching profile from Custom API');
       final response = await http.get(
         Uri.parse("${baseURL}auth/profile"),
         headers: {
@@ -86,15 +80,10 @@ class LoginController extends GetxController{
         var data = jsonDecode(response.body);
         currentUser.value = data;
       } else {
-        print('Failed to load profile. Status: ${response.statusCode}');
         Get.snackbar("Error", "Could not load profile data.");
       }
     }
-     catch (e) {
-      // 2. Network timeout ya parsing error yahan catch hogi
-      print('Catch Error in fetchUserProfile: $e');
-    } finally {
-      // 3. Kuch bhi ho jaye (Success ya Failure), loading yahan aakar hamesha close hogi
+     finally {
       isLoading.value = false;
     }
   }
@@ -135,21 +124,17 @@ class LoginController extends GetxController{
     try {
       isLoading.value = true;
 
-      // 1. Firebase aur Google ka session clear karo
       if (FirebaseAuth.instance.currentUser != null) {
         await GoogleSignIn.instance.signOut();
         await FirebaseAuth.instance.signOut();
       }
 
-      // 2. Custom API ka token clear karo
       box.remove('token');
       token.value = "";
       currentUser.value = {};
 
-      // 3. Clear karke login page par phenko
       Get.offAllNamed('/login');
     } catch (e) {
-      print("Logout error: $e");
       Get.snackbar("Error", "Logout failed: $e");
     } finally {
       isLoading.value = false;
