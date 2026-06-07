@@ -7,7 +7,7 @@ The Global News App is designed to offer a clean, responsive, and efficient news
 🛠 Tech Stack
 Framework: Flutter (Dart)
 
-Authentication: [Insert Service: e.g., Firebase Auth / Custom AP
+Authentication: Firebase Auth
 
 Platform: Android, Web
 
@@ -30,7 +30,7 @@ Error Resiliency: Implemented custom "Retry" logic to handle network interruptio
 Clone the repository:
 
 Bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://github.com/Anshullasod/news_app.git
 
 2. **Navigate to the project folder:**
    ```bash
