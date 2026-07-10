@@ -48,7 +48,7 @@ This project was developed during my 4th semester of B.Tech Computer Science and
 Developed by Anshul Lasod
 College of Technology and Engineering (CTAE)
 [Link to your LinkedIn Profile]-->
-# 📰 [Your App Name]: Daily News 
+# 📰 Daily News 
 
 ![Flutter](https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white)
 ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white)
@@ -58,9 +58,7 @@ College of Technology and Engineering (CTAE)
 A high-performance, cross-platform news aggregation application built with Flutter. The app fetches real-time global news, features secure Firebase authentication, and employs advanced API optimization techniques to ensure a seamless and cost-effective user experience.
 
 ## 📱 Visual Walkthrough
-> **Note to Anshul:** Yaha par apni app ke 2-3 high-quality screenshots ya ek 10-second ka GIF zaroor add karna jisme shimmer effect aur search filter dikh raha ho. UI projects bina visuals ke impact nahi banate.
-> 
-> *Format: `![Screen 1](link_to_image) ![Screen 2](link_to_image)`*
+https://www.linkedin.com/posts/anshullasod_flutter-mobiledevelopment-webdevelopment-ugcPost-7469392543256956928-Vibg/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAFV9mfQBj-4VHnvpJ5FICl3A2XVGaLLkWSA
 
 ## 🚀 Core Features
 * **Secure Authentication:** Multi-layered login system utilizing Firebase (Email/Password & Google Sign-In).
@@ -95,5 +93,5 @@ Standard search bars fire an API request for every keystroke, which rapidly exha
 5. Run the app: `flutter run`
 
 ## 📬 Contact
-* **LinkedIn:** [Your LinkedIn URL]
+* **LinkedIn:** www.linkedin.com/in/anshullasod
 * **Email:** Anshullasod@gmail.com 
